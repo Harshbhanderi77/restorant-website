@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Consent Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 26px;
+            width: 30%;
+            background-color: white;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            box-shadow: 0 0px 35px 0 rgba(0, 0, 0, 0.25);
+        }
+        .cookie-banner p {
+            margin: 14px;   
+            font-size: 14px;
+            line-height: 1.75;
+        }
+        .cookie-banner .buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .buttons{
+            align-items: center;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .cookie-banner .buttons button {
+            padding: 12px 42px;
+            border: none;
+            cursor: pointer;
+        }
+        .cookie-banner .buttons .accept {
+            background-color: #007bff;
+            color: white;
+            font-size: 12px;
+        }
+        .cookie-banner .buttons .preferences {
+            background-color: #f0f0f0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cookie-banner" id="cookieBanner">
+        <p >We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
+        <div class="buttons">
+            <button class="preferences" onclick="setPreferences()">Preferences</button>
+            <button class="accept" onclick="acceptCookies()">Accept</button>
+        </div>
+    </div>
+
+    <script>
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function acceptCookies() {
+            setCookie('userConsent', 'accepted', 365);
+            document.getElementById('cookieBanner').style.display = 'none';
+            updateCookieInfo();
+        }
+
+        function setPreferences() {
+            // Implement preferences setting functionality
+            alert('Preferences setting is not implemented in this example.');
+        }
+
+        function updateCookieInfo() {
+            let consent = getCookie('userConsent');
+            document.getElementById('cookieValue').textContent = consent ? consent : 'No cookie set';
+        }
+
+        window.onload = function() {
+            updateCookieInfo();
+            let consent = getCookie('userConsent');
+            if (consent) {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

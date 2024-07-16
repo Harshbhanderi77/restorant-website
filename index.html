@@ -660,7 +660,7 @@
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="">Home</a>
-                                <a href="">Cookies</a>
+                                <a href="./cookies.html">Cookies</a>
                                 <a href="">Help</a>
                                 <a href="">FQAs</a>
                             </div>
@@ -668,12 +668,22 @@
                     </div>
                 </div>
             </div>
+        
         </div>
         <!-- Footer End -->
 
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+        <!-- Website Cookies Policy -->
+        <div class="cookie-banner" id="cookieBanner">
+            <p >We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
+            <div class="buttons">
+                <button class="preferences" onclick="setPreferences()">Preferences</button>
+                <button class="accept" onclick="acceptCookies()">Accept</button>
+            </div>
+        </div>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -690,6 +700,55 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    
+    <!-- Website Cookie Policy -->
+    <script>
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function acceptCookies() {
+            setCookie('userConsent', 'accepted', 365);
+            document.getElementById('cookieBanner').style.display = 'none';
+            updateCookieInfo();
+        }
+
+        function setPreferences() {
+            // Implement preferences setting functionality
+            alert('Preferences setting is not implemented in this example.');
+        }
+
+        function updateCookieInfo() {
+            let consent = getCookie('userConsent');
+            document.getElementById('cookieValue').textContent = consent ? consent : 'No cookie set';
+        }
+
+        window.onload = function() {
+            updateCookieInfo();
+            let consent = getCookie('userConsent');
+            if (consent) {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 </html>
