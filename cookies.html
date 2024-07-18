@@ -5,56 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Consent Example</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
         .cookie-banner {
             position: fixed;
-            bottom: 20px;
-            left: 26px;
-            width: 30%;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
             background-color: white;
             align-items: center;
             justify-content: center;
-            padding: 10px 20px;
+            padding: 20px;
             box-shadow: 0 0px 35px 0 rgba(0, 0, 0, 0.25);
+            z-index: 4;
+            border-radius: 6px;
         }
+    
         .cookie-banner p {
-            margin: 14px;   
+            margin: 14px;
             font-size: 14px;
             line-height: 1.75;
+            color: #000000;
         }
+    
         .cookie-banner .buttons {
             display: flex;
             gap: 12px;
-            margin-bottom: 14px;
-        }
-        .buttons{
-            align-items: center;
-            justify-content: center;
             margin-top: 16px;
+            justify-content: center;
         }
+    
         .cookie-banner .buttons button {
-            padding: 12px 42px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
+            font-size: 12px;
         }
+    
         .cookie-banner .buttons .accept {
             background-color: #007bff;
             color: white;
-            font-size: 12px;
         }
+    
         .cookie-banner .buttons .preferences {
             background-color: #f0f0f0;
-            font-size: 12px;
+        }
+    
+        @media (max-width: 600px) {
+            .cookie-banner {
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                transform: none;
+                border-radius: 0;
+                box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            .cookie-banner p {
+                font-size: 12px;
+            }
+    
+            .cookie-banner .buttons button {
+                padding: 10px 20px;
+                font-size: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="cookie-banner" id="cookieBanner">
-        <p >We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
+        <p>We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
         <div class="buttons">
             <button class="preferences" onclick="setPreferences()">Preferences</button>
             <button class="accept" onclick="acceptCookies()">Accept</button>
@@ -71,7 +91,7 @@
             }
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
-
+    
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
@@ -82,23 +102,22 @@
             }
             return null;
         }
-
+    
         function acceptCookies() {
             setCookie('userConsent', 'accepted', 365);
             document.getElementById('cookieBanner').style.display = 'none';
             updateCookieInfo();
         }
-
+    
         function setPreferences() {
-            // Implement preferences setting functionality
             alert('Preferences setting is not implemented in this example.');
         }
-
+    
         function updateCookieInfo() {
             let consent = getCookie('userConsent');
             document.getElementById('cookieValue').textContent = consent ? consent : 'No cookie set';
         }
-
+    
         window.onload = function() {
             updateCookieInfo();
             let consent = getCookie('userConsent');

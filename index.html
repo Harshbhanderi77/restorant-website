@@ -405,7 +405,7 @@
                             <span></span>
                         </button> -->
                     </div>
-                </div>
+                </div> 
                 <div class="col-md-6 bg-dark d-flex align-items-center">
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
@@ -415,7 +415,7 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
+                                        <label for="name">Your Name</label> 
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -477,7 +477,7 @@
         </div>
         <!-- Reservation Start -->
 
-
+ 
         <!-- Team Start -->
         <div class="container-xxl pt-5 pb-3">
             <div class="container">
@@ -604,7 +604,7 @@
             </div>
         </div>
         <!-- Testimonial End -->
-        
+           
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -678,7 +678,7 @@
 
         <!-- Website Cookies Policy -->
         <div class="cookie-banner" id="cookieBanner">
-            <p >We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
+            <p>We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking "Accept," you agree to our website's cookie use as described in our <a href="#">Cookie Policy</a>.</p>
             <div class="buttons">
                 <button class="preferences" onclick="setPreferences()">Preferences</button>
                 <button class="accept" onclick="acceptCookies()">Accept</button>
@@ -713,7 +713,7 @@
             }
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
-
+    
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
@@ -724,23 +724,22 @@
             }
             return null;
         }
-
+    
         function acceptCookies() {
             setCookie('userConsent', 'accepted', 365);
             document.getElementById('cookieBanner').style.display = 'none';
             updateCookieInfo();
         }
-
+    
         function setPreferences() {
-            // Implement preferences setting functionality
             alert('Preferences setting is not implemented in this example.');
         }
-
+    
         function updateCookieInfo() {
             let consent = getCookie('userConsent');
             document.getElementById('cookieValue').textContent = consent ? consent : 'No cookie set';
         }
-
+    
         window.onload = function() {
             updateCookieInfo();
             let consent = getCookie('userConsent');
